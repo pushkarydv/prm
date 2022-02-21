@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Navbar({ bgClass = "" }) {
   return (
     <>
@@ -8,7 +10,9 @@ export default function Navbar({ bgClass = "" }) {
       >
         <div className="w-fit flex flex-row items-center">
           <img src="/prm.svg" alt="" className="w-8" />{" "}
-          <span className="text-cyan-500 text-4xl pl-2">PRM</span>
+          <Link to="/" className="no-underline text-cyan-500 text-4xl pl-2">
+            PRM
+          </Link>
         </div>
         <a
           href="/"

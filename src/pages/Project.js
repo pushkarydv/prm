@@ -4,7 +4,6 @@ import {
   LanguageBadges,
   FPL,
   versionControlBadges,
-  SocialsBadges,
 } from "../components/Badges";
 import Navbar from "../components/Navbar";
 
@@ -21,13 +20,39 @@ export default function Project() {
       sc3: "",
     },
     guide: "",
-    techStacks: {
-      language: [...LanguageBadges],
-      versionControl: [...versionControlBadges],
-      database: [...DatabaseBadges],
-      fpl: [...FPL],
-    },
   });
+
+  const [languages, setLanguages] = useState([...LanguageBadges]);
+  const [versionControl, setVersionControl] = useState([
+    ...versionControlBadges,
+  ]);
+  const [database, setDatabase] = useState([...DatabaseBadges]);
+  const [fpl, setFpl] = useState([...FPL]);
+
+  function handleTechLang(techName) {
+    const myNextList = [...languages];
+    const current = languages.find((a) => a.name === techName);
+    current.isSelected = current.isSelected ? false : true;
+    setLanguages(myNextList);
+  }
+  function handleTechVersion(techName, selected) {
+    const myNextList = [...versionControl];
+    const current = versionControl.find((a) => a.name === techName);
+    current.isSelected = current.isSelected ? false : true;
+    setVersionControl(myNextList);
+  }
+  function handleTechDatabase(techName, selected) {
+    const myNextList = [...database];
+    const current = database.find((a) => a.name === techName);
+    current.isSelected = current.isSelected ? false : true;
+    setDatabase(myNextList);
+  }
+  function handleTechFpl(techName, selected) {
+    const myNextList = [...fpl];
+    const current = fpl.find((a) => a.name === techName);
+    current.isSelected = current.isSelected ? false : true;
+    setFpl(myNextList);
+  }
   const [markdown, setMarkdown] = useState("");
   return (
     <>
@@ -119,7 +144,7 @@ export default function Project() {
                 Languages
               </div>
               <div className="text-slate-700">
-                {project.techStacks.language.map((badge) => (
+                {languages.map((badge) => (
                   <div
                     className={
                       "transition-all w-fit inline-block m-1  border rounded-lg " +
@@ -128,6 +153,118 @@ export default function Project() {
                         : "border-slate-600")
                     }
                     key={badge.name}
+                    onClick={() => handleTechLang(badge.name)}
+                  >
+                    {" "}
+                    <span className="pl-2 pr-1 py-1">{badge.name}</span>{" "}
+                    <button
+                      className={
+                        "w-6  rounded-r-md font-medium " +
+                        (badge.isSelected
+                          ? "bg-slate-50 text-slate-600 "
+                          : "bg-slate-600 text-white")
+                      }
+                    >
+                      <div
+                        className={
+                          "transition-all inline-block " +
+                          (badge.isSelected ? " rotate-45" : "rotate-0")
+                        }
+                      >
+                        +
+                      </div>
+                    </button>
+                  </div>
+                ))}
+              </div>
+              <div className="text-slate-900 font-medium pt-6 pb-2">
+                Framework & Libraries
+              </div>
+              <div className="text-slate-700">
+                {fpl.map((badge) => (
+                  <div
+                    className={
+                      "transition-all w-fit inline-block m-1  border rounded-lg " +
+                      (badge.isSelected
+                        ? "bg-slate-600 text-white"
+                        : "border-slate-600")
+                    }
+                    key={badge.name}
+                    onClick={() => handleTechFpl(badge.name)}
+                  >
+                    {" "}
+                    <span className="pl-2 pr-1 py-1">{badge.name}</span>{" "}
+                    <button
+                      className={
+                        "w-6  rounded-r-md font-medium " +
+                        (badge.isSelected
+                          ? "bg-slate-50 text-slate-600 "
+                          : "bg-slate-600 text-white")
+                      }
+                    >
+                      <div
+                        className={
+                          "transition-all inline-block " +
+                          (badge.isSelected ? " rotate-45" : "rotate-0")
+                        }
+                      >
+                        +
+                      </div>
+                    </button>
+                  </div>
+                ))}
+              </div>
+              <div className="text-slate-900 font-medium pt-6 pb-2">
+                Databases
+              </div>
+              <div className="text-slate-700">
+                {database.map((badge) => (
+                  <div
+                    className={
+                      "transition-all w-fit inline-block m-1  border rounded-lg " +
+                      (badge.isSelected
+                        ? "bg-slate-600 text-white"
+                        : "border-slate-600")
+                    }
+                    key={badge.name}
+                    onClick={() => handleTechDatabase(badge.name)}
+                  >
+                    {" "}
+                    <span className="pl-2 pr-1 py-1">{badge.name}</span>{" "}
+                    <button
+                      className={
+                        "w-6  rounded-r-md font-medium " +
+                        (badge.isSelected
+                          ? "bg-slate-50 text-slate-600 "
+                          : "bg-slate-600 text-white")
+                      }
+                    >
+                      <div
+                        className={
+                          "transition-all inline-block " +
+                          (badge.isSelected ? " rotate-45" : "rotate-0")
+                        }
+                      >
+                        +
+                      </div>
+                    </button>
+                  </div>
+                ))}
+              </div>
+              <div className="text-slate-900 font-medium pt-6 pb-2">
+                Version Control
+              </div>
+              <div className="text-slate-700">
+                {versionControl.map((badge) => (
+                  <div
+                    className={
+                      "transition-all w-fit inline-block m-1  border rounded-lg " +
+                      (badge.isSelected
+                        ? "bg-slate-600 text-white"
+                        : "border-slate-600")
+                    }
+                    key={badge.name}
+                    onClick={() => handleTechVersion(badge.name)}
                   >
                     {" "}
                     <span className="pl-2 pr-1 py-1">{badge.name}</span>{" "}

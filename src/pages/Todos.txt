@@ -2,3 +2,5 @@
 analytics
 
 templates
+
+delete text page , test route and may be markdown to main file

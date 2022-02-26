@@ -16,7 +16,7 @@ export default function Profile() {
         <div
           className={
             "transition-all form w-11/12 md:w-8/12 lg:w-1/2 xl:w-2/5 2xl:w-1/3 bg-sky-100 text-white  rounded mt-12 mx-auto px-4 py-8 md:p-4 lg:p-6 xl:p-8 lg:rounded-xl " +
-            (profile.step === 3 || profile.step === 6
+            (profile.step === 2 || profile.step === 6
               ? "md:w-10/12 lg:w-2/3 xl:w-3/5 2xl:w-3/5 "
               : profile.step === 4
               ? "md:w-10/12 lg:w-2/3 xl:w-4/5 2xl:w-4/5"
@@ -45,6 +45,25 @@ export default function Profile() {
                 onChange={(e) => {
                   setProfile({ ...profile, name: e.target.value });
                 }}
+              />
+            </>
+          )}
+          {profile.step === 2 && (
+            <>
+              <textarea
+                name="about"
+                rows="12"
+                cols="30"
+                placeholder="
+🔭 I’m currently working on
+👯 I’m looking to collaborate on
+🤝 I’m looking for help with
+🌱 I’m currently learning
+💬 Ask me about
+⚡ Fun fact
+"
+                className="bg-transparent transition border-b-sky-300 border-b-2 hover:border-b-sky-500 text-slate-800 w-full outline-none text-2xl p-1 lg:p-2 lg:mb-2 xl:mb-4 resize-none"
+                autoComplete="off"
               />
             </>
           )}

@@ -7,7 +7,7 @@ export default function Hero() {
         <div className="basis-3/5 text-5xl font-semibold md:text-6xl lg:text-7xl xl:text-8xl lg:pl-8">
           Create{" "}
           <AnimatedText words={["Modern", "Easy", "Cool", "Better", "🔥"]} />
-          <br /> Project Readme <br />
+          <br /> Readme <br />
           <div className="text-center mt-8 animate-bounce text-cyan-200">
             &#8623;
           </div>

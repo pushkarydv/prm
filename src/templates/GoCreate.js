@@ -19,7 +19,11 @@ export default function GoCreate() {
               key={name}
               to={to}
             >
-              <img src={img} className="w-full" alt="/profile" />
+              <img
+                src={process.env.PUBLIC_URL + img}
+                className="w-full"
+                alt="/profile"
+              />
               <div className="text-3xl font-semibold  pt-3">{name} </div>
             </Link>
           ))}

@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import {
   DatabaseBadges,
   LanguageBadges,
@@ -6,6 +7,7 @@ import {
   versionControlBadges,
 } from "../components/Badges";
 import Navbar from "../components/Navbar";
+import PreviewProject from "../components/PreviewProject";
 export default function Project() {
   const [project, setProject] = useState({
     step: 1,
@@ -65,7 +67,7 @@ export default function Project() {
           className={
             "transition-all form w-11/12 md:w-8/12 lg:w-1/2 xl:w-2/5 2xl:w-1/3 bg-sky-100 text-white  rounded mt-12 mx-auto px-4 py-8 md:p-4 lg:p-6 xl:p-8 lg:rounded-xl " +
             (project.step === 3 || project.step === 6
-              ? "md:w-10/12 lg:w-2/3 xl:w-3/5 2xl:w-3/5 "
+              ? "md:w-10/12 lg:w-2/3 xl:w-3/5 2xl:w-3/5"
               : project.step === 4 || project.step === 7
               ? "md:w-10/12 lg:w-2/3 xl:w-4/5 2xl:w-4/5"
               : "md:w-8/12 lg:w-1/2 xl:w-2/5 2xl:w-1/3")
@@ -77,17 +79,19 @@ export default function Project() {
             </div>
           )}
           {project.step === 1 && (
-            <input
-              type="text"
-              name="name"
-              value={project.name}
-              placeholder="Project Name"
-              className="bg-transparent transition border-b-sky-300 border-b-2 hover:border-b-sky-500 text-slate-800 w-full outline-none text-2xl p-1 lg:p-2 lg:mb-2 xl:mb-4"
-              autoComplete="off"
-              onChange={(e) => {
-                setProject({ ...project, name: e.target.value });
-              }}
-            />
+            <>
+              <input
+                type="text"
+                name="name"
+                value={project.name}
+                placeholder="Project Name"
+                className="bg-transparent transition border-b-sky-300 border-b-2 hover:border-b-sky-500 text-slate-800 w-full outline-none text-2xl p-1 lg:p-2 lg:mb-2 xl:mb-4"
+                autoComplete="off"
+                onChange={(e) => {
+                  setProject({ ...project, name: e.target.value });
+                }}
+              />
+            </>
           )}
           {project.step === 2 && (
             <>
@@ -124,19 +128,25 @@ export default function Project() {
               <div className="text-slate-500 text-xl pt-5">About:</div>
               <textarea
                 name="about"
-                rows="8"
+                rows="10"
                 cols="30"
                 style={{ resize: "none" }}
                 value={project.about}
-                placeholder={
-                  "A short tagline \n(use these - sign so that markdown create a list) \n- line 1 \n- line 2 \n- line 3 \n- and other lines"
-                }
+                placeholder="
+you can write md too😉
+A short tagline 
+(- sign to create a md list) 
+- line 1 
+- line 2 
+- line 3 
+- and other lines
+                "
                 className="bg-transparent transition border-b-sky-300 border-b-2 hover:border-b-sky-500 text-slate-800 w-full outline-none text-2xl p-1 lg:p-2 lg:mb-2 xl:mb-4"
                 autoComplete="off"
                 onChange={(e) => {
                   setProject({ ...project, about: e.target.value });
                 }}
-              />
+              ></textarea>
             </>
           )}
           {project.step === 4 && (
@@ -144,150 +154,152 @@ export default function Project() {
               <div className="text-slate-900 font-medium pt-6 pb-2">
                 Languages
               </div>
-              <div className="text-slate-700">
-                {languages.map((badge) => (
-                  <div
-                    className={
-                      "transition-all w-fit inline-block m-1  border rounded-lg " +
-                      (badge.isSelected
-                        ? "bg-slate-600 text-white"
-                        : "border-slate-600")
-                    }
-                    key={badge.name}
-                    onClick={() => handleTechLang(badge.name)}
-                  >
-                    {" "}
-                    <span className="pl-2 pr-1 py-1">{badge.name}</span>{" "}
-                    <button
+              <div className="font-medium">
+                <div className="text-slate-700">
+                  {languages.map((badge) => (
+                    <div
                       className={
-                        "w-6  rounded-r-md font-medium " +
+                        "transition-all w-fit inline-block m-1  border rounded-lg " +
                         (badge.isSelected
-                          ? "bg-slate-50 text-slate-600 "
-                          : "bg-slate-600 text-white")
+                          ? "bg-slate-600 text-white"
+                          : "border-slate-600")
                       }
+                      key={badge.name}
+                      onClick={() => handleTechLang(badge.name)}
                     >
-                      <div
+                      {" "}
+                      <span className="pl-2 pr-1 py-1">{badge.name}</span>{" "}
+                      <button
                         className={
-                          "transition-all inline-block " +
-                          (badge.isSelected ? " rotate-45" : "rotate-0")
+                          "w-6  rounded-r-md font-medium " +
+                          (badge.isSelected
+                            ? "bg-slate-50 text-slate-600 "
+                            : "bg-slate-600 text-white")
                         }
                       >
-                        +
-                      </div>
-                    </button>
-                  </div>
-                ))}
-              </div>
-              <div className="text-slate-900 font-medium pt-6 pb-2">
-                Framework & Libraries
-              </div>
-              <div className="text-slate-700">
-                {fpl.map((badge) => (
-                  <div
-                    className={
-                      "transition-all w-fit inline-block m-1  border rounded-lg " +
-                      (badge.isSelected
-                        ? "bg-slate-600 text-white"
-                        : "border-slate-600")
-                    }
-                    key={badge.name}
-                    onClick={() => handleTechFpl(badge.name)}
-                  >
-                    {" "}
-                    <span className="pl-2 pr-1 py-1">{badge.name}</span>{" "}
-                    <button
+                        <div
+                          className={
+                            "transition-all inline-block " +
+                            (badge.isSelected ? " rotate-45" : "rotate-0")
+                          }
+                        >
+                          +
+                        </div>
+                      </button>
+                    </div>
+                  ))}
+                </div>
+                <div className="text-slate-900 font-medium pt-6 pb-2">
+                  Framework & Libraries
+                </div>
+                <div className="text-slate-700">
+                  {fpl.map((badge) => (
+                    <div
                       className={
-                        "w-6  rounded-r-md font-medium " +
+                        "transition-all w-fit inline-block m-1  border rounded-lg " +
                         (badge.isSelected
-                          ? "bg-slate-50 text-slate-600 "
-                          : "bg-slate-600 text-white")
+                          ? "bg-slate-600 text-white"
+                          : "border-slate-600")
                       }
+                      key={badge.name}
+                      onClick={() => handleTechFpl(badge.name)}
                     >
-                      <div
+                      {" "}
+                      <span className="pl-2 pr-1 py-1">{badge.name}</span>{" "}
+                      <button
                         className={
-                          "transition-all inline-block " +
-                          (badge.isSelected ? " rotate-45" : "rotate-0")
+                          "w-6  rounded-r-md font-medium " +
+                          (badge.isSelected
+                            ? "bg-slate-50 text-slate-600 "
+                            : "bg-slate-600 text-white")
                         }
                       >
-                        +
-                      </div>
-                    </button>
-                  </div>
-                ))}
-              </div>
-              <div className="text-slate-900 font-medium pt-6 pb-2">
-                Databases
-              </div>
-              <div className="text-slate-700">
-                {database.map((badge) => (
-                  <div
-                    className={
-                      "transition-all w-fit inline-block m-1  border rounded-lg " +
-                      (badge.isSelected
-                        ? "bg-slate-600 text-white"
-                        : "border-slate-600")
-                    }
-                    key={badge.name}
-                    onClick={() => handleTechDatabase(badge.name)}
-                  >
-                    {" "}
-                    <span className="pl-2 pr-1 py-1">{badge.name}</span>{" "}
-                    <button
+                        <div
+                          className={
+                            "transition-all inline-block " +
+                            (badge.isSelected ? " rotate-45" : "rotate-0")
+                          }
+                        >
+                          +
+                        </div>
+                      </button>
+                    </div>
+                  ))}
+                </div>
+                <div className="text-slate-900 font-medium pt-6 pb-2">
+                  Databases
+                </div>
+                <div className="text-slate-700">
+                  {database.map((badge) => (
+                    <div
                       className={
-                        "w-6  rounded-r-md font-medium " +
+                        "transition-all w-fit inline-block m-1  border rounded-lg " +
                         (badge.isSelected
-                          ? "bg-slate-50 text-slate-600 "
-                          : "bg-slate-600 text-white")
+                          ? "bg-slate-600 text-white"
+                          : "border-slate-600")
                       }
+                      key={badge.name}
+                      onClick={() => handleTechDatabase(badge.name)}
                     >
-                      <div
+                      {" "}
+                      <span className="pl-2 pr-1 py-1">{badge.name}</span>{" "}
+                      <button
                         className={
-                          "transition-all inline-block " +
-                          (badge.isSelected ? " rotate-45" : "rotate-0")
+                          "w-6  rounded-r-md font-medium " +
+                          (badge.isSelected
+                            ? "bg-slate-50 text-slate-600 "
+                            : "bg-slate-600 text-white")
                         }
                       >
-                        +
-                      </div>
-                    </button>
-                  </div>
-                ))}
-              </div>
-              <div className="text-slate-900 font-medium pt-6 pb-2">
-                Version Control
-              </div>
-              <div className="text-slate-700">
-                {versionControl.map((badge) => (
-                  <div
-                    className={
-                      "transition-all w-fit inline-block m-1  border rounded-lg " +
-                      (badge.isSelected
-                        ? "bg-slate-600 text-white"
-                        : "border-slate-600")
-                    }
-                    key={badge.name}
-                    onClick={() => handleTechVersion(badge.name)}
-                  >
-                    {" "}
-                    <span className="pl-2 pr-1 py-1">{badge.name}</span>{" "}
-                    <button
+                        <div
+                          className={
+                            "transition-all inline-block " +
+                            (badge.isSelected ? " rotate-45" : "rotate-0")
+                          }
+                        >
+                          +
+                        </div>
+                      </button>
+                    </div>
+                  ))}
+                </div>
+                <div className="text-slate-900 font-medium pt-6 pb-2">
+                  Version Control
+                </div>
+                <div className="text-slate-700">
+                  {versionControl.map((badge) => (
+                    <div
                       className={
-                        "w-6  rounded-r-md font-medium " +
+                        "transition-all w-fit inline-block m-1  border rounded-lg " +
                         (badge.isSelected
-                          ? "bg-slate-50 text-slate-600 "
-                          : "bg-slate-600 text-white")
+                          ? "bg-slate-600 text-white"
+                          : "border-slate-600")
                       }
+                      key={badge.name}
+                      onClick={() => handleTechVersion(badge.name)}
                     >
-                      <div
+                      {" "}
+                      <span className="pl-2 pr-1 py-1">{badge.name}</span>{" "}
+                      <button
                         className={
-                          "transition-all inline-block " +
-                          (badge.isSelected ? " rotate-45" : "rotate-0")
+                          "w-6  rounded-r-md font-medium " +
+                          (badge.isSelected
+                            ? "bg-slate-50 text-slate-600 "
+                            : "bg-slate-600 text-white")
                         }
                       >
-                        +
-                      </div>
-                    </button>
-                  </div>
-                ))}
+                        <div
+                          className={
+                            "transition-all inline-block " +
+                            (badge.isSelected ? " rotate-45" : "rotate-0")
+                          }
+                        >
+                          +
+                        </div>
+                      </button>
+                    </div>
+                  ))}
+                </div>
               </div>
             </>
           )}
@@ -368,27 +380,38 @@ export default function Project() {
                 onChange={(e) => {
                   setProject({ ...project, guide: e.target.value });
                 }}
+              ></textarea>
+            </>
+          )}
+          {project.step === 7 && (
+            <>
+              <PreviewProject
+                project={project}
+                database={database}
+                versionControl={versionControl}
+                fpl={fpl}
+                languages={languages}
               />
             </>
           )}
-          {project.step <= 6 && (
-            <div
-              className={
-                "w-full mt-6 text-xl " + (project.step > 1 && "flex gap-1")
-              }
-            >
-              {project.step > 1 && (
-                <button
-                  className="transition-all basis-1/3 text-center bg-slate-500 hover:bg-slate-600 rounded-md my-2 py-2 hover:scale-95"
-                  onClick={() => {
-                    project.step > 1 &&
-                      setProject({ ...project, step: project.step - 1 });
-                  }}
-                >
-                  &lt; Back
-                </button>
-              )}
 
+          <div
+            className={
+              "w-full mt-6 text-xl " + (project.step > 1 && "flex gap-1")
+            }
+          >
+            {project.step > 1 && (
+              <button
+                className="transition-all text-center bg-slate-500 hover:bg-slate-600 rounded-md my-2 py-2 hover:scale-95 basis-1/3"
+                onClick={() => {
+                  project.step > 1 &&
+                    setProject({ ...project, step: project.step - 1 });
+                }}
+              >
+                &lt; Back
+              </button>
+            )}
+            {project.step < 7 && (
               <button
                 className={
                   "transition-all text-center bg-sky-500 hover:bg-sky-600 rounded-md my-2 py-2 hover:scale-95 " +
@@ -401,6 +424,11 @@ export default function Project() {
               >
                 Continue &gt;
               </button>
+            )}
+          </div>
+          {project.step === 7 && (
+            <div className="text-slate-800 text-center text-xl pt-2">
+              Hey👋, Can you help us to grow by sharing{" "}
             </div>
           )}
           {project.step > 1 && project.step <= 6 && (

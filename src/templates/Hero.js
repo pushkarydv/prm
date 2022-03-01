@@ -13,7 +13,11 @@ export default function Hero() {
           </div>
         </div>
         <div className="basis-2/5 p-8 xl:p-12">
-          <img src="/assets/hero.svg" className="w-full" alt="" />
+          <img
+            src={process.env.PUBLIC_URL + "/assets/hero.svg"}
+            className="w-full"
+            alt=""
+          />
         </div>
       </div>
     </>

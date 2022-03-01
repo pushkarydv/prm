@@ -7,6 +7,7 @@ import {
   versionControlBadges,
 } from "../components/Badges";
 import PreviewProfile from "../components/PreviewProfile";
+import Footer from "../templates/Footer";
 export default function Profile() {
   const [profile, setProfile] = useState({
     step: 1,
@@ -320,9 +321,12 @@ export default function Profile() {
             )}
           </div>
           {profile.step === 4 && (
-            <div className="text-slate-800 text-center text-xl pt-2">
-              Hey👋, Can you help us to grow by sharing{" "}
-            </div>
+            <>
+              <div className="text-slate-800 text-center text-xl pt-2">
+                Hey👋, Can you help us to grow by sharing{" "}
+              </div>
+              <Footer />
+            </>
           )}
           {profile.step > 1 && (
             <div className="text-slate-500 pt-2">

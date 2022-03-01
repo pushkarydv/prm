@@ -8,6 +8,7 @@ import {
 } from "../components/Badges";
 import Navbar from "../components/Navbar";
 import PreviewProject from "../components/PreviewProject";
+import Footer from "../templates/Footer";
 export default function Project() {
   const [project, setProject] = useState({
     step: 1,
@@ -427,9 +428,12 @@ A short tagline
             )}
           </div>
           {project.step === 7 && (
-            <div className="text-slate-800 text-center text-xl pt-2">
-              Hey👋, Can you help us to grow by sharing{" "}
-            </div>
+            <>
+              <div className="text-slate-800 text-center text-xl pt-2">
+                Hey👋, Can you help us to grow by sharing{" "}
+              </div>
+              <Footer />
+            </>
           )}
           {project.step > 1 && project.step <= 6 && (
             <div className="text-slate-500 pt-2">

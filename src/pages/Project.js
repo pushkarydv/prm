@@ -427,6 +427,11 @@ A short tagline
               </button>
             )}
           </div>
+          {project.step > 1 && project.step <= 6 && (
+            <div className="text-slate-500 pt-2">
+              no fields are not mandatory, you may leave them blank
+            </div>
+          )}
           {project.step === 7 && (
             <>
               <div className="text-slate-800 text-center text-xl pt-2">
@@ -434,11 +439,6 @@ A short tagline
               </div>
               <Footer />
             </>
-          )}
-          {project.step > 1 && project.step <= 6 && (
-            <div className="text-slate-500 pt-2">
-              no fields are not mandatory, you may leave them blank
-            </div>
           )}
         </div>
       </div>

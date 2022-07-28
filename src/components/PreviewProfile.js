@@ -31,7 +31,7 @@ export default function PreviewProfile({
               {profile.about} <br /> <br />
             </>
           )}
-          <br /># Tech Stack {"\n"}
+          <br /># Tech Stack <br />
           {languages.map(
             (badge) =>
               badge.isSelected && (
@@ -67,7 +67,7 @@ export default function PreviewProfile({
           <br />
           {!(profile.username === "") && (
             <>
-              # GitHub Stats : {"\n"}
+              # GitHub Stats : <br />
               ![](https://github-readme-stats.vercel.app/api?username=
               {profile.username}
               &hide_border=false&include_all_commits=false&count_private=false)

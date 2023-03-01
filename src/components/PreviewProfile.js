@@ -5,7 +5,11 @@ export default function PreviewProfile({
   languages,
   database,
   fpl,
+  social,
+  badgeType,
 }) {
+  let about = profile.about.split("\n");
+
   return (
     <>
       <div className="mt-4 md:mt-8">
@@ -28,7 +32,10 @@ export default function PreviewProfile({
             <>
               # About Me
               <br />
-              {profile.about} <br /> <br />
+              {about.map((element) => (
+                <p>{element}</p>
+              ))}
+              <br />
             </>
           )}
           <br /># Tech Stack <br />
@@ -36,7 +43,12 @@ export default function PreviewProfile({
             (badge) =>
               badge.isSelected && (
                 <span key={badge.name}>
-                  ![{badge.name}]({badge.image}) <br />
+                  ![{badge.name}](
+                  {"https://img.shields.io/badge/" +
+                    badge.image +
+                    "&style=" +
+                    badgeType}
+                  ) <br />
                 </span>
               )
           )}
@@ -44,7 +56,12 @@ export default function PreviewProfile({
             (badge) =>
               badge.isSelected && (
                 <span key={badge.name}>
-                  ![{badge.name}]({badge.image}) <br />
+                  ![{badge.name}](
+                  {"https://img.shields.io/badge/" +
+                    badge.image +
+                    "&style=" +
+                    badgeType}
+                  ) <br />
                 </span>
               )
           )}
@@ -52,7 +69,12 @@ export default function PreviewProfile({
             (badge) =>
               badge.isSelected && (
                 <span key={badge.name}>
-                  ![{badge.name}]({badge.image}) <br />
+                  ![{badge.name}](
+                  {"https://img.shields.io/badge/" +
+                    badge.image +
+                    "&style=" +
+                    badgeType}
+                  ) <br />
                 </span>
               )
           )}
@@ -60,7 +82,25 @@ export default function PreviewProfile({
             (badge) =>
               badge.isSelected && (
                 <span key={badge.name}>
-                  ![{badge.name}]({badge.image}) <br />
+                  ![{badge.name}](
+                  {"https://img.shields.io/badge/" +
+                    badge.image +
+                    "&style=" +
+                    badgeType}
+                  ) <br />
+                </span>
+              )
+          )}
+          {social.map(
+            (badge) =>
+              badge.isSelected && (
+                <span key={badge.name}>
+                  ![{badge.name}](
+                  {"https://img.shields.io/badge/" +
+                    badge.image +
+                    "&style=" +
+                    badgeType}
+                  ) <br />
                 </span>
               )
           )}
@@ -118,29 +158,80 @@ export default function PreviewProfile({
           )}
 
           <div className="text-2xl font-medium mt-4">Tech Stack</div>
-          <div className="flex flex-row gap-1 flex-wrap mt-4">
+          <div className="flex flex-row gap-1 text-2xl flex-wrap mt-4">
             {languages.map(
               (badge) =>
                 badge.isSelected && (
-                  <img src={badge.image} key={badge.name} alt="badge" />
+                  <img
+                    src={
+                      "https://img.shields.io/badge/" +
+                      badge.image +
+                      "&style=" +
+                      badgeType
+                    }
+                    key={badge.name}
+                    alt="badge"
+                  />
                 )
             )}
             {fpl.map(
               (badge) =>
                 badge.isSelected && (
-                  <img src={badge.image} key={badge.name} alt="badge" />
+                  <img
+                    src={
+                      "https://img.shields.io/badge/" +
+                      badge.image +
+                      "&style=" +
+                      badgeType
+                    }
+                    key={badge.name}
+                    alt="badge"
+                  />
                 )
             )}
             {database.map(
               (badge) =>
                 badge.isSelected && (
-                  <img src={badge.image} key={badge.name} alt="badge" />
+                  <img
+                    src={
+                      "https://img.shields.io/badge/" +
+                      badge.image +
+                      "&style=" +
+                      badgeType
+                    }
+                    key={badge.name}
+                    alt="badge"
+                  />
                 )
             )}
             {versionControl.map(
               (badge) =>
                 badge.isSelected && (
-                  <img src={badge.image} key={badge.name} alt="badge" />
+                  <img
+                    src={
+                      "https://img.shields.io/badge/" +
+                      badge.image +
+                      "&style=" +
+                      badgeType
+                    }
+                    key={badge.name}
+                    alt="badge"
+                  />
+                )
+            )}
+            {social.map(
+              (badge) =>
+                badge.isSelected && (
+                  <img
+                    src={
+                      "https://img.shields.io/badge/" +
+                      badge.image +
+                      "&style=" +
+                      badgeType
+                    }
+                    key={badge.name}
+                    alt="badge"
+                  />
                 )
             )}
           </div>

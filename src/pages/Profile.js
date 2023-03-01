@@ -16,6 +16,7 @@ export default function Profile() {
     username: "",
     about: "",
   });
+  const [twitterUsername, setTwitterUsername] = useState("");
   const [languages, setLanguages] = useState([...LanguageBadges]);
   const [versionControl, setVersionControl] = useState([
     ...versionControlBadges,
@@ -69,7 +70,7 @@ export default function Profile() {
             "transition-all form w-11/12 md:w-8/12 lg:w-1/2 xl:w-2/5 2xl:w-1/3 bg-sky-100 text-white  rounded mt-12 mx-auto px-4 py-8 md:p-4 lg:p-6 xl:p-8 lg:rounded-xl " +
             (profile.step === 2 || profile.step === 6
               ? "md:w-10/12 lg:w-2/3 xl:w-3/5 2xl:w-3/5 "
-              : profile.step === 3 || profile.step === 4
+              : profile.step === 3 || profile.step === 5
               ? "md:w-10/12 lg:w-2/3 xl:w-4/5 2xl:w-4/5"
               : "md:w-8/12 lg:w-1/2 xl:w-2/5 2xl:w-1/3")
           }
@@ -349,6 +350,29 @@ export default function Profile() {
           )}
           {profile.step === 4 && (
             <>
+              <div className="mb-6 text-black text-lg font-medium grid place-items-center">
+                <div className="text-xl lg:text-2xl">
+                  {" "}
+                  Wait Now you can add your realtime tweet too and see it on
+                  your profile
+                </div>
+
+                <input
+                  type="text"
+                  className="transition-all p-2 ring-2 rounded-lg w-full ring-purple-600/10 focus:ring-purple-600/20 text-purple-700 outline-none md:w-2/3 mx-auto mt-8 lg:mt-12  lg:mb-6 xl:mt-16 xl:mb-8"
+                  value={twitterUsername}
+                  onChange={(e) => {
+                    setTwitterUsername(e.target.value);
+                  }}
+                  id="data"
+                  placeholder={"twitter username without @"}
+                  autoComplete="off"
+                />
+              </div>
+            </>
+          )}
+          {profile.step === 5 && (
+            <>
               <PreviewProfile
                 profile={profile}
                 database={database}
@@ -357,6 +381,7 @@ export default function Profile() {
                 languages={languages}
                 social={social}
                 badgeType={badgeType}
+                twitterUsername={twitterUsername}
               />
             </>
           )}
@@ -376,14 +401,14 @@ export default function Profile() {
                 &lt; Back
               </button>
             )}
-            {profile.step < 4 && (
+            {profile.step < 5 && (
               <button
                 className={
                   "transition-all text-center bg-sky-500 hover:bg-sky-600 rounded-md my-2 py-2 hover:scale-95 " +
                   (profile.step > 1 ? "basis-2/3" : "w-full")
                 }
                 onClick={() => {
-                  profile.step < 4 &&
+                  profile.step < 5 &&
                     setProfile({ ...profile, step: profile.step + 1 });
                 }}
               >
@@ -391,7 +416,7 @@ export default function Profile() {
               </button>
             )}
           </div>
-          {profile.step === 4 && (
+          {profile.step === 5 && (
             <>
               <div className="text-slate-800 text-center text-xl pt-2">
                 Hey👋, Can you help us to grow by sharing{" "}

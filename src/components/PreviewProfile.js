@@ -7,6 +7,7 @@ export default function PreviewProfile({
   fpl,
   social,
   badgeType,
+  twitterUsername,
 }) {
   let about = profile.about.split("\n");
 
@@ -119,8 +120,22 @@ export default function PreviewProfile({
               {profile.username}
               &hide_border=false&include_all_commits=false&count_private=false&layout=compact)
               <br />
-              ---
-              <br />
+            </>
+          )}
+          <br />
+          {!(twitterUsername === "") && (
+            <>
+              # Latest Tweet <br />
+              <code className="tweeco-markdown-code">
+                [![](https://tweeco.pushkaryadav.in/api/handle/{twitterUsername}
+                )](https://tweeco.pushkaryadav.in)
+              </code>
+            </>
+          )}
+          <br />
+          <br />
+          {!(profile.username === "") && (
+            <>
               [![](https://visitcount.itsvg.in/api?id={profile.username}
               &icon=0&color=0)](https://visitcount.itsvg.in)
             </>
@@ -263,11 +278,27 @@ export default function PreviewProfile({
                 }
                 alt="stats"
               />
+            </>
+          )}
+          {!(twitterUsername === "") && (
+            <>
+              <div className="text-2xl mt-4 text-black">Latest Tweet</div>
               <img
-                src={"https://visitcount.itsvg.in/api?id=" + profile.username}
-                alt="stats"
+                src={
+                  "https://tweeco.pushkaryadav.in/api/handle/" +
+                  twitterUsername +
+                  "?bg=264348"
+                }
+                alt="latest tweets "
+                loading="lazy"
               />
             </>
+          )}
+          {!(profile.username === "") && (
+            <img
+              src={"https://visitcount.itsvg.in/api?id=" + profile.username}
+              alt="stats"
+            />
           )}
         </div>
       </div>

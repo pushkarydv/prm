@@ -5,6 +5,7 @@ import {
   LanguageBadges,
   FPL,
   versionControlBadges,
+  SocialsBadges,
 } from "../components/Badges";
 import Navbar from "../components/Navbar";
 import PreviewProject from "../components/PreviewProject";
@@ -30,6 +31,8 @@ export default function Project() {
   ]);
   const [database, setDatabase] = useState([...DatabaseBadges]);
   const [fpl, setFpl] = useState([...FPL]);
+  const [social, setSocial] = useState([...SocialsBadges]);
+  const [badgeType, setBadgeType] = useState("for-the-badge");
 
   function handleTechLang(techName) {
     const myNextList = [...languages];
@@ -54,6 +57,12 @@ export default function Project() {
     const current = fpl.find((a) => a.name === techName);
     current.isSelected = current.isSelected ? false : true;
     setFpl(myNextList);
+  }
+  function handleSocial(name, selected) {
+    const myNextList = [...social];
+    const current = social.find((a) => a.name === name);
+    current.isSelected = current.isSelected ? false : true;
+    setSocial(myNextList);
   }
 
   return (
@@ -152,18 +161,37 @@ A short tagline
           )}
           {project.step === 4 && (
             <>
+              <div className="text-center text-xl text-black">
+                Badge Type:{" "}
+                <select
+                  name="badge-type"
+                  id="badge-type"
+                  onChange={(e) => {
+                    setBadgeType(e.target.value);
+                  }}
+                  className="bg-black text-white p-1 rounded"
+                >
+                  <option value="for-the-badge" defaultValue={true}>
+                    For The Badge
+                  </option>
+                  <option value="plastic">Plastic</option>
+                  <option value="flat">Flat</option>
+                  <option value="flat-square">Flat Square</option>
+                  <option value="social">Social</option>
+                </select>
+              </div>
               <div className="text-slate-900 font-medium pt-6 pb-2">
                 Languages
               </div>
-              <div className="font-medium">
+              <div className="font-medium text-xl">
                 <div className="text-slate-700">
                   {languages.map((badge) => (
                     <div
                       className={
-                        "transition-all w-fit inline-block m-1  border rounded-lg " +
+                        "transition-all cursor-pointer w-fit inline-block m-1  border-2 rounded-lg " +
                         (badge.isSelected
-                          ? "bg-slate-600 text-white"
-                          : "border-slate-600")
+                          ? "bg-slate-700 border-slate-700 text-slate-50"
+                          : "border-slate-300 text-slate-800")
                       }
                       key={badge.name}
                       onClick={() => handleTechLang(badge.name)}
@@ -174,8 +202,8 @@ A short tagline
                         className={
                           "w-6  rounded-r-md font-medium " +
                           (badge.isSelected
-                            ? "bg-slate-50 text-slate-600 "
-                            : "bg-slate-600 text-white")
+                            ? " text-slate-50 "
+                            : "text-slate-600")
                         }
                       >
                         <div
@@ -197,10 +225,10 @@ A short tagline
                   {fpl.map((badge) => (
                     <div
                       className={
-                        "transition-all w-fit inline-block m-1  border rounded-lg " +
+                        "transition-all cursor-pointer w-fit inline-block m-1  border-2 rounded-lg " +
                         (badge.isSelected
-                          ? "bg-slate-600 text-white"
-                          : "border-slate-600")
+                          ? "bg-slate-700 border-slate-700 text-slate-50"
+                          : "border-slate-300 text-slate-800")
                       }
                       key={badge.name}
                       onClick={() => handleTechFpl(badge.name)}
@@ -211,8 +239,8 @@ A short tagline
                         className={
                           "w-6  rounded-r-md font-medium " +
                           (badge.isSelected
-                            ? "bg-slate-50 text-slate-600 "
-                            : "bg-slate-600 text-white")
+                            ? " text-slate-50 "
+                            : "text-slate-600")
                         }
                       >
                         <div
@@ -234,10 +262,10 @@ A short tagline
                   {database.map((badge) => (
                     <div
                       className={
-                        "transition-all w-fit inline-block m-1  border rounded-lg " +
+                        "transition-all cursor-pointer w-fit inline-block m-1  border-2 rounded-lg " +
                         (badge.isSelected
-                          ? "bg-slate-600 text-white"
-                          : "border-slate-600")
+                          ? "bg-slate-700 border-slate-700 text-slate-50"
+                          : "border-slate-300 text-slate-800")
                       }
                       key={badge.name}
                       onClick={() => handleTechDatabase(badge.name)}
@@ -248,8 +276,8 @@ A short tagline
                         className={
                           "w-6  rounded-r-md font-medium " +
                           (badge.isSelected
-                            ? "bg-slate-50 text-slate-600 "
-                            : "bg-slate-600 text-white")
+                            ? " text-slate-50 "
+                            : "text-slate-600")
                         }
                       >
                         <div
@@ -271,10 +299,10 @@ A short tagline
                   {versionControl.map((badge) => (
                     <div
                       className={
-                        "transition-all w-fit inline-block m-1  border rounded-lg " +
+                        "transition-all cursor-pointer w-fit inline-block m-1  border-2 rounded-lg " +
                         (badge.isSelected
-                          ? "bg-slate-600 text-white"
-                          : "border-slate-600")
+                          ? "bg-slate-700 border-slate-700 text-slate-50"
+                          : "border-slate-300 text-slate-800")
                       }
                       key={badge.name}
                       onClick={() => handleTechVersion(badge.name)}
@@ -285,8 +313,45 @@ A short tagline
                         className={
                           "w-6  rounded-r-md font-medium " +
                           (badge.isSelected
-                            ? "bg-slate-50 text-slate-600 "
-                            : "bg-slate-600 text-white")
+                            ? " text-slate-50 "
+                            : "text-slate-600")
+                        }
+                      >
+                        <div
+                          className={
+                            "transition-all inline-block " +
+                            (badge.isSelected ? " rotate-45" : "rotate-0")
+                          }
+                        >
+                          +
+                        </div>
+                      </button>
+                    </div>
+                  ))}
+                </div>
+                <div className="text-slate-900 font-medium pt-6 pb-2">
+                  Socials
+                </div>
+                <div className="text-slate-700">
+                  {SocialsBadges.map((badge) => (
+                    <div
+                      className={
+                        "transition-all cursor-pointer w-fit inline-block m-1  border-2 rounded-lg " +
+                        (badge.isSelected
+                          ? "bg-slate-700 border-slate-700 text-slate-50"
+                          : "border-slate-300 text-slate-800")
+                      }
+                      key={badge.name}
+                      onClick={() => handleSocial(badge.name)}
+                    >
+                      {" "}
+                      <span className="pl-2 pr-1 py-1">{badge.name}</span>{" "}
+                      <button
+                        className={
+                          "w-6  rounded-r-md font-medium " +
+                          (badge.isSelected
+                            ? " text-slate-50 "
+                            : "text-slate-600")
                         }
                       >
                         <div
@@ -392,6 +457,8 @@ A short tagline
                 versionControl={versionControl}
                 fpl={fpl}
                 languages={languages}
+                social={social}
+                badgeType={badgeType}
               />
             </>
           )}
